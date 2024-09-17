@@ -41,13 +41,6 @@ Ensure you have the following installed:
     ```sql
     CREATE DATABASE arithmetic_db;
     ```
-
-  - Run the migrations:
-
-    ```bash
-    go run migrations.go
-    ```
-
    Make sure your `DATABASE_URL` in the `.env` file is pointing to your database correctly.
 
 5. **Run the Application**
