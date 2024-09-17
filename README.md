@@ -13,8 +13,7 @@ Ensure you have the following installed:
 1. **Clone the Repository**
 
     ```bash
-    git clone https://github.com/your-username/your-backend-repo.git
-    cd your-backend-repo
+    git clone https://github.com/ezequielfornes/arithmetic-calculator-go.git
     ```
 
 2. **Environment Variables**
@@ -22,8 +21,7 @@ Ensure you have the following installed:
    Create a `.env` file in the root directory with the following:
 
     ```bash
-    DATABASE_URL=your_postgres_connection_string
-    SENDGRID_API_KEY=your_sendgrid_api_key
+    DATABASE_URL= dbConnection
     ```
 
    Alternatively, you can set the environment variables in your system or cloud environment settings (e.g., Render, Heroku).
@@ -41,7 +39,7 @@ Ensure you have the following installed:
   - Create a PostgreSQL database:
 
     ```sql
-    CREATE DATABASE your_database_name;
+    CREATE DATABASE arithmetic_db;
     ```
 
   - Run the migrations:
@@ -114,10 +112,6 @@ Ensure you have the following installed:
     ```bash
     docker-compose up --build
     ```
-
-8. **Deployment**
-
-   For deployment to a cloud platform (e.g., Render, Heroku), configure the environment variables directly in their respective environment settings. Ensure you include `DATABASE_URL` and `SENDGRID_API_KEY`.
 
 ## API Endpoints
 
