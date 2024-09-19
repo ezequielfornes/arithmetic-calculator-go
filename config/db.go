@@ -12,13 +12,7 @@ import (
 var DB *gorm.DB
 
 func InitDB() {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"),
-		os.Getenv("DB_PORT"),
-	)
+	dsn := getDsn()
 	log.Println("Connecting to postgres database...")
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -41,15 +35,7 @@ func InitDB() {
 		log.Println("Database created successfully!")
 	}
 
-	dsnWithDB := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASSWORD"),
-		os.Getenv("DB_NAME"),
-		os.Getenv("DB_PORT"),
-	)
-
-	DB, err = gorm.Open(postgres.Open(dsnWithDB), &gorm.Config{})
+	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatalf("Failed to connect to the database: %v", err)
 	}
@@ -103,4 +89,23 @@ func SeedDatabase() {
 		DB.Create(&operations)
 		log.Println("Seeded operations.")
 	}
+}
+
+func getDsn() string {
+	if os.Getenv("APP_ENV") == "test" {
+		return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+			os.Getenv("DB_HOST_TEST"),
+			os.Getenv("DB_USER_TEST"),
+			os.Getenv("DB_PASSWORD_TEST"),
+			os.Getenv("DB_NAME_TEST"),
+			os.Getenv("DB_PORT_TEST"),
+		)
+	}
+	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable",
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_NAME"),
+		os.Getenv("DB_PORT"),
+	)
 }

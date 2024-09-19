@@ -12,16 +12,15 @@ import (
 )
 
 func main() {
-
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
 	config.InitDB()
 	config.InitRedis()
 
 	r := routes.SetupRouter()
-
 	r.Use(cors.New(cors.Config{
 		AllowOrigins:     []string{"http://localhost:3000"},
 		AllowMethods:     []string{"POST", "GET", "OPTIONS"},
