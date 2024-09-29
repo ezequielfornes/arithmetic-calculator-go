@@ -12,6 +12,8 @@ func SetupRouter() *gin.Engine {
 	r := gin.Default()
 
 	// Public routes
+
+	r.POST("/api", controllers.Ping)
 	r.POST("/api/v1/auth/login", controllers.Login)
 	r.POST("/api/v1/auth/register", controllers.Register)
 	r.OPTIONS("/*path", func(c *gin.Context) {

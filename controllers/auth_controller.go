@@ -14,6 +14,10 @@ type LoginInput struct {
 	Password string `json:"password"`
 }
 
+func Ping(c *gin.Context) {
+
+	c.JSON(http.StatusOK, gin.H{"ping": "pong"})
+}
 func Login(c *gin.Context) {
 	var input LoginInput
 	if err := c.ShouldBindJSON(&input); err != nil {
